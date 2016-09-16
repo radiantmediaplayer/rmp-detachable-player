@@ -9,7 +9,7 @@ This extension can be used as so or tuned with JavaScript/CSS to better fit your
 ## Features
 - Always-on-screen player - regardless of the page scrolling position - for a more immersive video experience
 - Automatic resizing of player based on attach/detach states 
-- Mobile-ready (responsive with media queries)
+- Mobile-ready
 - Works with video ads
 - Easily extended with JavaScript and CSS
 
