@@ -1,7 +1,7 @@
 # rmp-detachable-player
 
 rmp-detachable-player is an open-source extension for [Radiant Media Player](https://www.radiantmediaplayer.com) 
-allowing to attach/detach the player when scrolling into page. As such the player can be visible at all time regardless 
+allowing to attach/detach the player when scrolling into a page. As such the player can be visible at all time regardless 
 of the page scrolling position.
 
 This extension can be used as so or tuned with JavaScript/CSS to better fit your project design.
