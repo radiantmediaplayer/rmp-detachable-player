@@ -19,13 +19,25 @@
   <link rel="icon" type="image/png" href="https://www.radiantmediaplayer.com/images/radiantmediaplayer-icon.png">
   <link rel="apple-touch-icon" href="https://www.radiantmediaplayer.com/images/apple-touch-icon.png">
   <style>
+    /*  This is our rmpPlayer (player container) id and rmp-detach CSS class 
+    **  we apply positioning and animation
+    */
+    
+    #rmpPlayer {
+      margin: auto;
+    }
+    
+    #rmpPlayer:not(.rmp-fullscreen-on) {
+      -webkit-transition: width 0.4s ease-out, height 0.4s ease-out;
+      -moz-transition: width 0.4s ease-out, height 0.4s ease-out;
+      transition: width 0.4s ease-out, height 0.4s ease-out;
+    }
+    
     #rmpPlayer.rmp-detach {
       position: fixed;
-      bottom: 10px;
-      right: 10px;
-      -webkit-transition: width 0.2s ease-out, height 0.2s ease-out;
-      -moz-transition: width 0.2s ease-out, height 0.2s ease-out;
-      transition: width 0.2s ease-out, height 0.2s ease-out;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999999;
     }
   </style>
 </head>
@@ -51,8 +63,10 @@
           sem at sapien. Vivamus leo. Aliquam euismod libero eu enim. Nulla nec felis sed leo placerat imperdiet. Aenean suscipit nulla in justo. Suspendisse cursus rutrum augue. Nulla tincidunt tincidunt mi. Curabitur iaculis, lorem vel rhoncus faucibus,
           felis magna fermentum augue, et ultricies lacus lorem varius purus. Curabitur eu amet.</p>
         <br>
+        <!-- here we set our player anchor - this is a mandatory requirement -->
         <div id="playerAnchor"></div>
-        <div id="rmpPlayer" style="margin: auto;"></div>
+        <!-- then next to the anchor our player container -->
+        <div id="rmpPlayer"></div>
         <br>
         <br>
         <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod
@@ -139,7 +153,9 @@
       </div>
     </div>
   </div>
+  <!-- Radiant Media Player core JS file -->
   <script src="https://cdn.radiantmediatechs.com/rmp/v3/latest/js/rmp.min.js"></script>
+  <!-- Our detach JS script -->
   <script src="js/rmp-detach.js"></script>
 </body>
 

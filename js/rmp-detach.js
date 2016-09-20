@@ -3,12 +3,13 @@
   'use strict';
 
   // we define our player width/height for the attached and detached states
-  // as always those represent maximu values 
+  // as always those represent maximum values 
   var attachedlWidth = 640;
   var attachedHeight = 360;
   var detachedWidth = 384;
   var detachedHeight = 216;
 
+  // we define our player streaming URLs and settings
   var bitrates = {
     mp4: [
       'https://www.radiantmediaplayer.com/media/bbb-360p.mp4'
@@ -21,44 +22,52 @@
     //licenseKey: 'your-license-key,
     bitrates: bitrates,
     width: attachedlWidth,
-    height: attachedHeight, 
+    height: attachedHeight,
     //debug: true,
     // Video ads requires a licenseKey
     //ads: true,
     //adTagUrl: 'https://www.radiantmediaplayer.com/vast/tags/inline.xml',
     poster: 'https://www.radiantmediaplayer.com/images/poster-rmp-showcase.jpg'
   };
-  
+
   // our reference to the player and player container
   var element = 'rmpPlayer';
   var rmp = new RadiantMP(element);
+  // on mobile we may want a different width/height for the detached state
+  // this is optional 
+  if (rmp.env.isMobile) {
+    detachedWidth = 288;
+    detachedHeight = 162;
+  }
   var rmpContainer = document.getElementById(element);
-   
+
   // here is our player anchor which we use for accurate positioning
   var playerAnchor = document.getElementById('playerAnchor');
-  
+
   // our local variables
   var playerTop;
   var windowTop;
   var playerAttached = true;
 
-  // function to run when the player should be detach
+  // function to run when the player should be detached
   // the rmp-detach class is defined in index.html
   function detachPlayer() {
     //console.log('detachPlayer');
     playerAttached = false;
     // this is an internal player method to add class to an element
     rmp.fw.addClass(rmpContainer, 'rmp-detach');
+    // set player size for detached state
     rmp.setPlayerSize(detachedWidth, detachedHeight);
   }
 
-  // function to run when the player should be re-attach to  its original location
+  // function to run when the player should be attached to its original location
   function attachPlayer() {
     //console.log('attachPlayer');
     playerAttached = true;
+    // set player size for attached state
+    rmp.setPlayerSize(attachedlWidth, attachedHeight);
     // this is an internal player method to remove class to an element
     rmp.fw.removeClass(rmpContainer, 'rmp-detach');
-    rmp.setPlayerSize(attachedlWidth, attachedHeight);
   }
 
   // function to run when we need to check the scroll position
@@ -86,7 +95,7 @@
     }
   }
 
-  // when player is ready we get its position on page
+  // when player is ready we get its orignal location on page
   rmpContainer.addEventListener('ready', function () {
     windowTop = window.pageYOffset || document.documentElement.scrollTop;
     playerTop = playerAnchor.getBoundingClientRect().top + windowTop;
