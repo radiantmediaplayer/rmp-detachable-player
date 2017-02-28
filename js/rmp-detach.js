@@ -11,35 +11,23 @@
 
   // we define our player streaming URLs and settings
   var bitrates = {
-    mp4: [
-      'https://www.radiantmediaplayer.com/media/bbb-360p.mp4'
-    ]
-    // HLS streaming requires a licenseKey
-    //hls: 'https://streamingrmp-1479.kxcdn.com/vod/smil:bbb.smil/playlist.m3u8'
+    hls: 'https://streamingrmp-1479.kxcdn.com/vod/smil:bbb.smil/playlist.m3u8'
   };
 
   var settings = {
-    //licenseKey: 'your-license-key,
+    licenseKey: 'Kl8lbz16cz1rN2l2enM9Z2M9NnZvMnllaT9yb201ZGFzaXMzMGRiMEElXyo=',
     bitrates: bitrates,
     width: attachedlWidth,
     height: attachedHeight,
-    //debug: true,
-    // Video ads requires a licenseKey
     //ads: true,
     //adTagUrl: 'https://www.radiantmediaplayer.com/vast/tags/inline.xml',
     poster: 'https://www.radiantmediaplayer.com/images/poster-rmp-showcase.jpg'
   };
 
   // our reference to the player and player container
-  var element = 'rmpPlayer';
-  var rmp = new RadiantMP(element);
-  // on mobile we may want a different width/height for the detached state
-  // this is optional 
-  if (rmp.env.isMobile) {
-    detachedWidth = 288;
-    detachedHeight = 162;
-  }
-  var rmpContainer = document.getElementById(element);
+  var elementID = 'rmpPlayer';
+  var rmp = new RadiantMP(elementID);
+  var rmpContainer = document.getElementById(elementID);
 
   // here is our player anchor which we use for accurate positioning
   var playerAnchor = document.getElementById('playerAnchor');
@@ -48,14 +36,16 @@
   var playerTop;
   var windowTop;
   var playerAttached = true;
+  var rmpEnv;
+  var rmpFW;
 
   // function to run when the player should be detached
-  // the rmp-detach class is defined in index.html
+  // the rmp-detach class CSS is defined in index.html
   function detachPlayer() {
     //console.log('detachPlayer');
     playerAttached = false;
     // this is an internal player method to add class to an element
-    rmp.fw.addClass(rmpContainer, 'rmp-detach');
+    rmpFW.addClass(rmpContainer, 'rmp-detach');
     // set player size for detached state
     rmp.setPlayerSize(detachedWidth, detachedHeight);
   }
@@ -64,20 +54,15 @@
   function attachPlayer() {
     //console.log('attachPlayer');
     playerAttached = true;
+    // this is an internal player method to remove class to an element
+    rmpFW.removeClass(rmpContainer, 'rmp-detach');
     // set player size for attached state
     rmp.setPlayerSize(attachedlWidth, attachedHeight);
-    // this is an internal player method to remove class to an element
-    rmp.fw.removeClass(rmpContainer, 'rmp-detach');
   }
 
   // function to run when we need to check the scroll position
   function checkScrollPosition() {
     windowTop = window.pageYOffset || document.documentElement.scrollTop;
-    // in some instances playerTop is not available here 
-    // because player ready event has not fired yet. We assign a value then.
-    if (typeof playerTop === 'undefined') {
-      playerTop = playerAnchor.getBoundingClientRect().top + windowTop;
-    }
     if (typeof playerTop === 'number' && typeof windowTop === 'number') {
       // when the player starts to be offpage due to scrolling we detach it
       // the + 10 value is an arbitrary padding value. Use your own if needed.
@@ -97,13 +82,27 @@
 
   // when player is ready we get its orignal location on page
   rmpContainer.addEventListener('ready', function () {
+    // we get environment data from the player
+    // this contains helper functions to know which features are supported 
+    // and what type of device are we on
+    rmpEnv = rmp.getEnvironment();
+    // this is the player internal framework 
+    // it has helper functions we need
+    rmpFW = rmp.getFramework();
+    // on mobile we may want a different width/height for the detached state
+    // this is optional 
+    if (rmpEnv.isMobile) {
+      detachedWidth = 288;
+      detachedHeight = 162;
+    }
     windowTop = window.pageYOffset || document.documentElement.scrollTop;
     playerTop = playerAnchor.getBoundingClientRect().top + windowTop;
+    // on ready refresh the player position
+    checkScrollPosition();
+    // on scroll/load refresh the player position
+    window.addEventListener('scroll', checkScrollPosition);
+    window.addEventListener('load', checkScrollPosition);
   });
-
-  // on load and scroll we need to refresh the player position
-  window.addEventListener('load', checkScrollPosition);
-  window.addEventListener('scroll', checkScrollPosition);
 
   // we init the player
   rmp.init(settings);
