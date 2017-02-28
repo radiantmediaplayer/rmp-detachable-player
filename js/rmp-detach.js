@@ -15,7 +15,7 @@
   };
 
   var settings = {
-    licenseKey: 'Kl8lbz16cz1rN2l2enM9Z2M9NnZvMnllaT9yb201ZGFzaXMzMGRiMEElXyo=',
+    licenseKey: 'your-license-key',
     bitrates: bitrates,
     width: attachedlWidth,
     height: attachedHeight,
