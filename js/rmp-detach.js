@@ -11,7 +11,7 @@
 
   // we define our player streaming URLs and settings
   var bitrates = {
-    hls: 'https://streamingrmp-1479.kxcdn.com/vod/smil:bbb.smil/playlist.m3u8'
+    hls: 'https://dqwp3xzzbfhtw.cloudfront.net/vod/smil:bbb.smil/playlist.m3u8'
   };
 
   var settings = {
