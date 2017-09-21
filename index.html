@@ -17,28 +17,7 @@
   <link rel="canonical" href="https://www.radiantmediaplayer.com/docs/latest/rmp-detachable-player/">
   <link rel="icon" type="image/png" href="https://www.radiantmediaplayer.com/images/radiantmediaplayer-icon.png">
   <link rel="apple-touch-icon" href="https://www.radiantmediaplayer.com/images/apple-touch-icon.png">
-  <style>
-    /*  This is our rmpPlayer (player container) id and rmp-detach CSS class 
-    **  we apply positioning and animation
-    */
-    
-    #rmpPlayer {
-      margin: auto;
-    }
-    
-    #rmpPlayer:not(.rmp-fullscreen-on) {
-      -webkit-transition: width 0.4s ease-out, height 0.4s ease-out;
-      -moz-transition: width 0.4s ease-out, height 0.4s ease-out;
-      transition: width 0.4s ease-out, height 0.4s ease-out;
-    }
-    
-    #rmpPlayer.rmp-detach {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 999999;
-    }
-  </style>
+  <link href="css/rmp-detach.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>

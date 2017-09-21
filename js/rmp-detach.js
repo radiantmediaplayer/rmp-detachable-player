@@ -2,67 +2,103 @@
 
   'use strict';
 
-  // we define our player width/height for the attached and detached states
-  // as always those represent maximum values 
-  var attachedlWidth = 640;
-  var attachedHeight = 360;
-  var detachedWidth = 384;
-  var detachedHeight = 216;
+  // we define our player aspect ratio
+  var playerRatio = 16 / 9;
+  // debug or not
+  var debug = true;
+  // reference to DOM player container and anchor
+  var playerId = 'rmpPlayer';
+  var playerContainer = document.getElementById(playerId);
+  var playerAnchor = document.getElementById('playerAnchor');
+  // our player instance
+  var rmp = new RadiantMP(playerId);
+  // player framework
+  var rmpFW = rmp.getFramework();
+
+  // initial computed width for player anchor in pixels
+  var initialAttachedPlayerWidth = 960;
 
   // we define our player streaming URLs and settings
   var bitrates = {
     hls: 'https://dqwp3xzzbfhtw.cloudfront.net/vod/smil:bbb.smil/playlist.m3u8'
   };
-
   var settings = {
     licenseKey: 'your-license-key',
     bitrates: bitrates,
-    width: attachedlWidth,
-    height: attachedHeight,
-    //ads: true,
-    //adTagUrl: 'https://www.radiantmediaplayer.com/vast/tags/inline.xml',
+    width: initialAttachedPlayerWidth,
+    height: initialAttachedPlayerWidth / playerRatio,
+    ads: true,
+    adTagUrl: 'https://www.radiantmediaplayer.com/vast/tags/inline-linear.xml',
     poster: 'https://www.radiantmediaplayer.com/images/poster-rmp-showcase.jpg'
   };
-
-  // our reference to the player and player container
-  var elementID = 'rmpPlayer';
-  var rmp = new RadiantMP(elementID);
-  var rmpContainer = document.getElementById(elementID);
-
-  // here is our player anchor which we use for accurate positioning
-  var playerAnchor = document.getElementById('playerAnchor');
 
   // our local variables
   var playerTop;
   var windowTop;
   var playerAttached = true;
-  var rmpEnv;
-  var rmpFW;
+
+  function getViewportWidth() {
+    return window.innerWidth || 0;
+  }
+
+  function getWindowTop() {
+    return window.pageYOffset || document.documentElement.scrollTop;
+  }
+
+  function getDetachedWidth() {
+    // the detachedWidth ratio values are arbitrary for 
+    // testing purposes fell free to modify them
+    var viewportWidth = getViewportWidth();
+    var detachedWidth = 0;
+    if (viewportWidth >= 1280) {
+      detachedWidth = viewportWidth / 4.5;
+    } else if (viewportWidth >= 1024) {
+      detachedWidth = viewportWidth / 3.5;
+    } else if (viewportWidth >= 768) {
+      detachedWidth = viewportWidth / 2.5;
+    } else {
+      detachedWidth = viewportWidth / 1.5;
+    }
+    return detachedWidth;
+  }
 
   // function to run when the player should be detached
-  // the rmp-detach class CSS is defined in index.html
   function detachPlayer() {
-    //console.log('detachPlayer');
+    if (debug) {
+      console.log('detachPlayer');
+    }
     playerAttached = false;
     // this is an internal player method to add class to an element
-    rmpFW.addClass(rmpContainer, 'rmp-detach');
-    // set player size for detached state
+    rmpFW.addClass(playerContainer, 'rmp-detach');
+    // set player size for detached state e.g. 50% of our current viewport width
+    var detachedWidth = getDetachedWidth();
+    if (debug) {
+      console.log('detachedWidth is: ' + detachedWidth);
+    }
+    var detachedHeight = detachedWidth / playerRatio;
     rmp.setPlayerSize(detachedWidth, detachedHeight);
   }
 
   // function to run when the player should be attached to its original location
   function attachPlayer() {
-    //console.log('attachPlayer');
+    if (debug) {
+      console.log('attachPlayer');
+    }
     playerAttached = true;
     // this is an internal player method to remove class to an element
-    rmpFW.removeClass(rmpContainer, 'rmp-detach');
-    // set player size for attached state
-    rmp.setPlayerSize(attachedlWidth, attachedHeight);
+    rmpFW.removeClass(playerContainer, 'rmp-detach');
+    // set player size for attached state e.g. playerAnchor computed width which could have changed
+    rmp.setPlayerSize(initialAttachedPlayerWidth, initialAttachedPlayerWidth / playerRatio);
+    // we call resize to make sure the player fits within its original location
+    rmp.resize();
   }
 
   // function to run when we need to check the scroll position
   function checkScrollPosition() {
-    windowTop = window.pageYOffset || document.documentElement.scrollTop;
+    if (debug) {
+      console.log('checkScrollPosition');
+    }
+    windowTop = getWindowTop();
     if (typeof playerTop === 'number' && typeof windowTop === 'number') {
       // when the player starts to be offpage due to scrolling we detach it
       // the + 10 value is an arbitrary padding value. Use your own if needed.
@@ -81,21 +117,11 @@
   }
 
   // when player is ready we get its orignal location on page
-  rmpContainer.addEventListener('ready', function () {
-    // we get environment data from the player
-    // this contains helper functions to know which features are supported 
-    // and what type of device are we on
-    rmpEnv = rmp.getEnvironment();
-    // this is the player internal framework 
-    // it has helper functions we need
-    rmpFW = rmp.getFramework();
-    // on mobile we may want a different width/height for the detached state
-    // this is optional 
-    if (rmpEnv.isMobile) {
-      detachedWidth = 288;
-      detachedHeight = 162;
+  playerContainer.addEventListener('ready', function () {
+    if (debug) {
+      console.log('ready');
     }
-    windowTop = window.pageYOffset || document.documentElement.scrollTop;
+    windowTop = getWindowTop();
     playerTop = playerAnchor.getBoundingClientRect().top + windowTop;
     // on ready refresh the player position
     checkScrollPosition();

@@ -1,0 +1,21 @@
+@charset "utf-8";
+/*  This is our rmpPlayer (player container) id and rmp-detach CSS class 
+**  we apply positioning and animation
+*/
+
+#rmpPlayer {
+  margin: auto;
+}
+
+#rmpPlayer:not(.rmp-fullscreen-on) {
+  -webkit-transition: width 0.4s ease-out, height 0.4s ease-out;
+  -moz-transition: width 0.4s ease-out, height 0.4s ease-out;
+  transition: width 0.4s ease-out, height 0.4s ease-out;
+}
+
+#rmpPlayer.rmp-detach {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999999;
+}
