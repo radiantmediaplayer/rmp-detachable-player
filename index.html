@@ -27,8 +27,12 @@
         <div class="text-center">
           <h1>rmp-detachable-player (PiP - picture in picture) example</h1>
           <h2>Radiant Media Player</h2>
-          <div><a href="https://www.radiantmediaplayer.com">Go back to radiantmediaplayer.com</a></div>
-          <div><a href="https://github.com/radiantmediaplayer/rmp-detachable-player">Go back to GitHub</a></div>
+          <div>
+            <a href="https://www.radiantmediaplayer.com">Go back to radiantmediaplayer.com</a>
+          </div>
+          <div>
+            <a href="https://github.com/radiantmediaplayer/rmp-detachable-player">Go back to GitHub</a>
+          </div>
           <h2>Scroll down to see what happens!</h2>
         </div>
         <h2>Article title</h2>
@@ -51,10 +55,13 @@
           nulla in justo. Suspendisse cursus rutrum augue. Nulla tincidunt tincidunt mi. Curabitur iaculis, lorem vel rhoncus
           faucibus, felis magna fermentum augue, et ultricies lacus lorem varius purus. Curabitur eu amet.</p>
         <br>
-        <!-- here we set our player anchor - this is a mandatory requirement -->
-        <div id="playerAnchor"></div>
-        <!-- then next to the anchor our player container -->
-        <div id="rmpPlayer"></div>
+        <!-- here we add our player attach-container div which serves as an anchor -->
+        <div id="attach-container">
+          <!-- the detach-container div, holding the player, will move around the page based on scroll position -->
+          <div id="detach-container">
+            <div id="rmpPlayer"></div>
+          </div>
+        </div>
         <br>
         <br>
         <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit
