@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>rmp-detachable-player example - Radiant Media Player</title>
+  <title>rmp-detachable-player outstream video ad example - Radiant Media Player</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
   <meta name="robots" content="noindex">
@@ -15,7 +15,7 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="text-center">
-          <h1>rmp-detachable-player (PiP - picture in picture) example</h1>
+          <h1>rmp-detachable-player (PiP - picture in picture) outstream video ad example</h1>
           <h2>Radiant Media Player</h2>
           <div>
             <a href="https://www.radiantmediaplayer.com">Go back to radiantmediaplayer.com</a>
@@ -84,6 +84,9 @@
         <br>
 
         <!-- here we add our player attach-container div which serves as an anchor -->
+        <h4 class="text-center">
+          <em>A word from our sponsor</em>
+        </h4>
         <div id="attach-container">
           <!-- the detach-container div, holding the player, will move around the page based on scroll position -->
           <div id="detach-container">
@@ -260,7 +263,7 @@
   <!-- Radiant Media Player core JS file -->
   <script src="https://cdn.radiantmediatechs.com/rmp/v4/latest/js/rmp.min.js"></script>
   <!-- Our detach JS script -->
-  <script src="js/rmp-detach.js"></script>
+  <script src="js/rmp-detach-outstream-video-ad.js"></script>
 </body>
 
 </html>

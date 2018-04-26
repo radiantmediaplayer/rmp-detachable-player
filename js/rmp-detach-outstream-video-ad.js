@@ -21,16 +21,19 @@
   var rmpFW = rmp.getFramework();
 
   // we define our player streaming URLs and settings
-  var bitrates = {
-    hls: 'https://www.rmp-streaming.com/media/hls/test-vectors/bbb-abr/playlist.m3u8'
-  };
   var settings = {
     licenseKey: 'your-license-key',
-    bitrates: bitrates,
     autoHeightMode: true,
-    // we can include ads as well if wanted
-    //ads: true,
-    //adTagUrl: 'https://www.radiantmediaplayer.com/vast/tags/inline-linear.xml',
+    ads: true,
+    adOutStream: true,
+    adTagReloadOnEnded: true,
+    // we will autoplay our outstream ad unit when first in view so muted we must use
+    muted: true,
+    adTagUrl: 'https://www.radiantmediaplayer.com/vast/tags/inline-linear.xml',
+    // we use client-side waterfalling in this case (optional)
+    adTagWaterfall: [
+      'https://www.radiantmediaplayer.com/vast/tags/inline-linear-1.xml'
+    ],
     poster: 'https://www.radiantmediaplayer.com/images/poster-rmp-showcase.jpg'
   };
 
@@ -63,10 +66,8 @@
         // we do not want to detach player before viewer has scrolled to it at least once
         if (!firstView) {
           firstView = true;
-          // if we wanted to start playback automatically when player comes into view the first time
-          // we would call play()
-          // in such case we should use muted: true in player settings as well
-          // rmp.play();
+          // here we automatically play our outstream ad when player first comes into view
+          rmp.play();
         }
         if (!playerAttached) {
           _attachPlayer();

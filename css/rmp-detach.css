@@ -7,8 +7,8 @@
 
 /* attach-container - this serves as an anchor for original player location */
 #attach-container {
-  width: 320px;
-  height: 180px;
+  width: 288px;
+  height: 162px;
   background: #000;
   margin: auto;
   -webkit-box-sizing: border-box;
@@ -52,12 +52,21 @@
 
 /* detach-container - when player is in detached mode */
 #detach-container.rmp-detach {
-  width: 296px;
-  height: 170px;
+  width: 292px;
+  height: 166px;
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 8px;
+  right: 8px;
   z-index: 999999;
-  border: 4px solid #000;
+  border: 2px solid #000;
   box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 768px) {
+  #detach-container.rmp-detach {
+    width: 484px;
+    height: 274px;
+    bottom: 16px;
+    right: 16px;
+  }
 }
