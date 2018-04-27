@@ -11,7 +11,7 @@ allowing to attach/detach the player when scrolling into a page (a.k.a. PiP - pi
 - Easily extended with JavaScript and CSS
 
 ## Usage
-See index.html and js/rmp-detach.js files for a better understanding of the attach/detach logic. 
+Download latest release from the releases tab. See index.html and js/rmp-detach.js files for a better understanding of the attach/detach logic. 
 For outstream video ad see outstream-video-ad.html and js/rmp-detach-outstream-video-ad.js files.
 Adapt those examples with your player settings and to fit your page layout.
 
