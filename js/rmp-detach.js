@@ -1,6 +1,6 @@
 /**
  * @license Copyright (c) 2015-2018 Radiant Media Player 
- * rmp-detachable-player 1.3.1 | https://github.com/radiantmediaplayer/rmp-detachable-player
+ * rmp-detachable-player 2.0.1 | https://github.com/radiantmediaplayer/rmp-detachable-player
  */
 
 (function () {
@@ -36,6 +36,11 @@
 
   // our app variables
   var debug = true;
+  var _log = function(data) {
+    if (window.console && window.console.log && data) {
+      window.console.log(data);
+    }
+  };
   var playerAttached = true;
   var viewablePreviousRatio = 0.5;
   var firstView = false;
@@ -58,7 +63,7 @@
     entries.forEach(function (entry) {
       if (entry.intersectionRatio > viewablePreviousRatio) {
         if (debug) {
-          rmpFW.log('player comes into view');
+          _log('player comes into view');
         }
         // we do not want to detach player before viewer has scrolled to it at least once
         if (!firstView) {
@@ -73,7 +78,7 @@
         }
       } else {
         if (debug) {
-          rmpFW.log('player comes out of view');
+          _log('player comes out of view');
         }
         if (playerAttached && firstView) {
           _detachPlayer();
