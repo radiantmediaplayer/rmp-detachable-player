@@ -1,6 +1,6 @@
 /**
  * @license Copyright (c) 2015-2018 Radiant Media Player 
- * rmp-detachable-player 2.0.1 | https://github.com/radiantmediaplayer/rmp-detachable-player
+ * rmp-detachable-player 2.0.2 | https://github.com/radiantmediaplayer/rmp-detachable-player
  */
 
 (function () {
