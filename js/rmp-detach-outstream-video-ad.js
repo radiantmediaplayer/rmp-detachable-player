@@ -26,6 +26,7 @@
     autoHeightMode: true,
     ads: true,
     adOutStream: true,
+    skin: 'outstream',
     // we will autoplay our outstream ad unit when first in view so muted we must use
     muted: true,
     adTagUrl: 'https://www.radiantmediaplayer.com/vast/tags/inline-linear.xml',

@@ -21,12 +21,12 @@
   var rmpFW = rmp.getFramework();
 
   // we define our player streaming URLs and settings
-  var bitrates = {
+  var src = {
     hls: 'https://www.rmp-streaming.com/media/hls/test-vectors/bbb-abr/playlist.m3u8'
   };
   var settings = {
     licenseKey: 'your-license-key',
-    bitrates: bitrates,
+    src: src,
     autoHeightMode: true,
     // we can include ads as well if wanted
     //ads: true,
