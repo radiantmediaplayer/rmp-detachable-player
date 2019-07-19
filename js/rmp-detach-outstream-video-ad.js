@@ -1,6 +1,6 @@
 /**
- * @license Copyright (c) 2015-2018 Radiant Media Player 
- * rmp-detachable-player 2.0.2 | https://github.com/radiantmediaplayer/rmp-detachable-player
+ * @license Copyright (c) 2015-2019 Radiant Media Player 
+ * rmp-detachable-player | https://github.com/radiantmediaplayer/rmp-detachable-player
  */
 
 (function () {
@@ -26,7 +26,6 @@
     autoHeightMode: true,
     ads: true,
     adOutStream: true,
-    adTagReloadOnEnded: true,
     // we will autoplay our outstream ad unit when first in view so muted we must use
     muted: true,
     adTagUrl: 'https://www.radiantmediaplayer.com/vast/tags/inline-linear.xml',
