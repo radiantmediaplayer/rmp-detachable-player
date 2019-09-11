@@ -22,7 +22,7 @@
 
   // we define our player streaming URLs and settings
   var src = {
-    hls: 'https://www.rmp-streaming.com/media/hls/test-vectors/bbb-abr/playlist.m3u8'
+    hls: 'https://5b44cf20b0388.streamlock.net:8443/vod/smil:bbb.smil/playlist.m3u8'
   };
   var settings = {
     licenseKey: 'your-license-key',
