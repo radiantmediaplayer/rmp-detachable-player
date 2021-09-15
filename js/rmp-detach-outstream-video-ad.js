@@ -17,8 +17,6 @@
   }
   // our player instance
   var rmp = new RadiantMP(playerId);
-  // player framework
-  var rmpFW = rmp.getFramework();
 
   // we define our player streaming URLs and settings
   var settings = {
@@ -34,7 +32,11 @@
     adTagWaterfall: [
       'https://www.radiantmediaplayer.com/vast/tags/inline-linear-1.xml'
     ],
-    poster: 'https://www.radiantmediaplayer.com/images/poster-rmp-showcase.jpg'
+    contentMetadata: {
+      poster: [
+        'https://www.radiantmediaplayer.com/images/poster-rmp-showcase.jpg'
+      ]
+    }
   };
 
   // our app variables
@@ -51,14 +53,14 @@
   // function to run when the player should detach
   var _detachPlayer = function () {
     playerAttached = false;
-    rmpFW.addClass(detachContainer, 'rmp-detach');
+    detachContainer.classList.add('rmp-detach');
     rmp.resize();
   };
 
   // function to run when the player should be attached to its original location
   var _attachPlayer = function () {
     playerAttached = true;
-    rmpFW.removeClass(detachContainer, 'rmp-detach');
+    detachContainer.classList.remove('rmp-detach');
     rmp.resize();
   };
 
@@ -91,7 +93,7 @@
 
   var _attachViewableObserver = function () {
     container.removeEventListener('ready', _attachViewableObserver);
-    if (typeof window.IntersectionObserver !== 'undefined') {
+    if (typeof IntersectionObserver !== 'undefined') {
       var options = {
         root: null,
         rootMargin: '0px',
