@@ -28,7 +28,7 @@
     autoHeightMode: true,
     // we can include ads as well if wanted
     //ads: true,
-    //adTagUrl: 'https://www.radiantmediaplayer.com/vast/tags/inline-linear.xml',
+    //adTagUrl: 'https://www.radiantmediaplayer.com/vast/tags/inline-linear-1.xml',
     contentMetadata: {
       poster: [
         'https://www.radiantmediaplayer.com/images/poster-rmp-showcase.jpg'
@@ -38,7 +38,7 @@
 
   // our app variables
   var debug = true;
-  var _log = function(data) {
+  var _log = function (data) {
     if (window.console && window.console.log && data) {
       window.console.log(data);
     }
@@ -72,8 +72,7 @@
           firstView = true;
           // if we wanted to start playback automatically when player comes into view the first time
           // we would call play()
-          // in such case we should use muted: true in player settings as well
-          // rmp.play();
+           rmp.play();
         }
         if (!playerAttached) {
           _attachPlayer();

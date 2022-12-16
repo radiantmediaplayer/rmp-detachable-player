@@ -1,6 +1,6 @@
 {
   "name": "rmp-detachable-player",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "author": "Radiant Media Player <support@radiantmediaplayer.com>",
   "description": "Attach/detach Radiant Media Player - automatic PiP (picture in picture) - when scrolling into a page",
   "repository": {
