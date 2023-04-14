@@ -1,3 +1,6 @@
+# ARCHIVED
+This repository is no longer maintained and will not receive any new update. [Floating feature](https://www.radiantmediaplayer.com/docs/latest/floating.html) is now built in Radiant Media Player core set of features. 
+
 # rmp-detachable-player
 
 rmp-detachable-player is an open-source extension for [Radiant Media Player](https://www.radiantmediaplayer.com) to allow automatic detachment of the player when scrolling into page (a.k.a. automatic PiP - picture in picture). As such the player can be visible at all time regardless of the page scrolling position. This extension makes use of the new [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
